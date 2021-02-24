@@ -16,7 +16,6 @@
 		E09C94EF25DD46B200DF3BFF /* ToDoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C94EE25DD46B200DF3BFF /* ToDoAppTests.swift */; };
 		E09C94FA25DD46B200DF3BFF /* ToDoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C94F925DD46B200DF3BFF /* ToDoAppUITests.swift */; };
 		E09C950B25DD4BCD00DF3BFF /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C950A25DD4BCD00DF3BFF /* AddViewController.swift */; };
-		E09C951725E2C0E900DF3BFF /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C951625E2C0E900DF3BFF /* EntryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +51,6 @@
 		E09C94F925DD46B200DF3BFF /* ToDoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoAppUITests.swift; sourceTree = "<group>"; };
 		E09C94FB25DD46B200DF3BFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E09C950A25DD4BCD00DF3BFF /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		E09C951625E2C0E900DF3BFF /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +101,6 @@
 		E09C94D625DD46AF00DF3BFF /* ToDoApp */ = {
 			isa = PBXGroup;
 			children = (
-				E09C951625E2C0E900DF3BFF /* EntryViewController.swift */,
 				E09C94D725DD46B000DF3BFF /* AppDelegate.swift */,
 				E09C94D925DD46B000DF3BFF /* SceneDelegate.swift */,
 				E09C94DB25DD46B000DF3BFF /* ViewController.swift */,
@@ -265,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E09C94DC25DD46B000DF3BFF /* ViewController.swift in Sources */,
-				E09C951725E2C0E900DF3BFF /* EntryViewController.swift in Sources */,
 				E09C94D825DD46B000DF3BFF /* AppDelegate.swift in Sources */,
 				E09C950B25DD4BCD00DF3BFF /* AddViewController.swift in Sources */,
 				E09C94DA25DD46B000DF3BFF /* SceneDelegate.swift in Sources */,
