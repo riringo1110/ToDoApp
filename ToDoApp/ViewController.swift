@@ -20,12 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let saveData = UserDefaults.standard
     
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//    }
-    
+      
     override func viewDidAppear(_ animated: Bool) {
         if saveData.object(forKey: "todoArray") != nil {
             //UserDefaultsの中身をArrayに表示
@@ -44,11 +39,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         table.dataSource = self
         table.delegate = self
         
-        toDoArray = ["りんご", "ごりら"]
-        dateArray = ["", ""]
-        
-        //もしUserDefaultsに中身あったら読み込む
-        
+//        toDoArray = ["りんご", "ごりら"]
+//        dateArray = ["", ""]
+//        
     }
     
     //セルの数を設定
@@ -71,7 +64,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             toDoArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
             dateArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+            saveData.set(toDoArray, forKey: "todoArray")
+            saveData.set(dateArray, forKey: "dateArray")
         }
     }
 }
