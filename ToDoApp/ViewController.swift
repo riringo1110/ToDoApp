@@ -11,6 +11,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet var table: UITableView!
     
+    
     var toDoList: String!
     var date: String!
     
@@ -22,6 +23,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let saveData = UserDefaults.standard
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,42 +37,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         dateArray = ["", ""]
         
         //もしUserDefaultsに中身あったら読み込む
-        if saveData.object(forKey: "toDoArray") != nil {
+        if saveData.object(forKey: "todoArray") != nil {
             //UserDefaultsの中身をArrayに表示
-            toDoArray = saveData.array(forKey: "toDoArray") as! [String]
-        }
-        if saveData.object(forKey: "dateArray") != nil{
+            toDoArray = saveData.array(forKey: "todoArray") as! [String]
+            
+            if saveData.object(forKey: "dateArray") != nil{
                 dateArray = saveData.array(forKey: "dateArray") as! [String]
             }
-        
-        //書いてたものがあればアペンドするよ
-        if toDoList != nil{
-            toDoArray.append(toDoList)
-            saveData.set(toDoArray, forKey: "toDoarray")
-            
-            dateArray.append(date)
-            saveData.setValue(dateArray, forKey: "dateArray")
         }
-            currentToDoArray = toDoArray
-            currentDateArray = dateArray
-        }
-    
-    
-    //アラート
-    override func viewDidAppear(_ animated: Bool) {
-        if toDoList != nil {
-            let alert: UIAlertController = UIAlertController(
-                title:"追加されました",
-                message: "",
-                preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK",style:.default,handler:nil))
-            present(alert,animated: true,completion: nil)
-        }
+        currentToDoArray = toDoArray
+        currentDateArray = dateArray
     }
     
-    //    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    //        tableView.deselectRow(at: indexPath, animated: true)
-    //    }
+   
+    @IBAction func add() {
+                // segueを使って画面遷移
+                performSegue(withIdentifier:  "toList", sender: nil)
+            }
+
+//            override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//                if segue.identifier == "toList" {
+//                    // 遷移先のViewControllerを取得
+//                    let next = segue.destination as? AddViewController
+//                    next?.resultHandler = { text
+//    }
+//
+            
+    
+    
     //セルの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentToDoArray.count
@@ -93,6 +89,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 }
+            
 
 
 

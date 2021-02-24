@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class AddViewController: UIViewController, UITextFieldDelegate {
     
     
@@ -15,6 +14,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     var toDoList: String!
     var date: String!
+    
+    var toDoArray = [String]()
+    var dateArray = [String]()
     
     var datePicker = DateFormatter()
     let saveData: UserDefaults = UserDefaults.standard
@@ -25,62 +27,74 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         textField.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-    }
+//    //データをリスト画面に受け渡す
+//    func toList() {
+//        performSegue(withIdentifier: "toList", sender: nil)
+//        //self.dismiss(animated: true, completion: nil)
+//    }
     
     //Segueを準備するときのメソッド
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toList" {
             let ViewController = segue.destination as! ViewController
-            ViewController.toDoList = self.toDoList
+            ViewController.toDoArray = self.toDoArray
             if date != nil {
-                ViewController.date = self.date
+                ViewController.dateArray = self.dateArray
             }else{
                 ViewController.date = ""
+                
             }
         }
     }
     
-    //データをリスト画面に受け渡す
-    func performSegueToList() {
-        performSegue(withIdentifier: "toList", sender: nil)
+    @IBAction func save() {
+        
+        toDoList = textField.text
+        date = datePicker.dateFormat
+        
+        toDoArray.append(toDoList)
+        dateArray.append(date)
+        saveData.set(toDoArray, forKey: "todoArray")
+        saveData.setValue(dateArray, forKey: "dateArray")
+        
+        self.dismiss(animated: true, completion: nil)
+        //書いてたものがあればアペンドするよ
+//        if toDoList != nil{
+//            toDoArray.append(toDoList)
+//            saveData.set(toDoArray, forKey: "todoArray")
+//
+//            if date != nil{
+//                dateArray.append(date)
+//                saveData.setValue(dateArray, forKey: "dateArray")
+//                print("ok")
+//
+               
+        
+        
+        //アラート
+//        override func viewDidAppear(_ animated: Bool) {
+//            if toDoList != nil {
+                let alert: UIAlertController = UIAlertController(title:"追加されました", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK",style:.default,handler:{ action in
+                    // 押された時のアクション
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                present(alert,animated: true,completion: nil)
+            }
+    
+    @IBAction func datePicker(_ sender: UIDatePicker) {
+        let format = DateFormatter ()
+        format.dateFormat = "yyyy/MM/dd"
+        date = format.string (from: sender.date)
     }
     
+    @IBAction func cancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
     //Keyboard閉じる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         return true
-    }
-    
-    @IBAction func save() {
-        
-        //toDoListに入力内容を入れる
-        toDoList = textField.text
-       
-        //dateWheelsの設定
-        dateWheels.datePickerMode = .date
-        datePicker.dateStyle = .short
-        datePicker.timeStyle = .short
-        datePicker.dateFormat =  DateFormatter.dateFormat(fromTemplate: "yyyy/MM/dd", options: 0, locale: Locale(identifier: "eng_JP"))
-        let selectedDate = datePicker.string(from: dateWheels.date)
-        date = selectedDate
-        
-        // UserDefaultsに書き込み
-        saveData.set(toDoList, forKey: "todo")
-        saveData.set(date, forKey: "date")
-
-        performSegueToList()
-    }
-  
-//    @IBAction func datePicker(_ sender: UIDatePicker) {
-//            let format = DateFormatter ()
-//            format.dateFormat = "yyyy/MM/dd"
-//        date = format.string (from: sender.date)
-//    }
-    
-    @IBAction func cancel() {
-        self.dismiss(animated: true, completion: nil)
     }
 }
