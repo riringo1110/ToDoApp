@@ -29,30 +29,11 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    //    //データをリスト画面に受け渡す
-    //    func toList() {
-    //        performSegue(withIdentifier: "toList", sender: nil)
-    //        //self.dismiss(animated: true, completion: nil)
-    //    }
-    
-//    //Segueを準備するときのメソッド
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toList" {
-//            let ViewController = segue.destination as! ViewController
-//            ViewController.toDoArray = self.toDoArray
-//            if date != nil {
-//                ViewController.dateArray = self.dateArray
-//            }else{
-//                ViewController.date = ""
-//
-//            }
-//        }
-//    }
-    
     @IBAction func datePicker(_ sender: UIDatePicker) {
         let format = DateFormatter ()
-        format.dateFormat = "yyyy/MM/dd"
+        format.dateFormat = "MM/dd HH:mm"
         date = format.string (from: sender.date)
+    
     }
     
     
@@ -63,19 +44,19 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         if saveData.object(forKey: "todoArray") != nil {
             //UserDefaultsの中身をArrayに表示
             toDoArray = saveData.array(forKey: "todoArray") as! [String]
-            print(toDoArray)
             
             if saveData.object(forKey: "dateArray") != nil{
                 dateArray = saveData.array(forKey: "dateArray") as! [String]
             }
         }
         toDoList = textField.text
-        date = datePicker.dateFormat
         
         toDoArray.append(toDoList)
         dateArray.append(date)
+       
         saveData.set(toDoArray, forKey: "todoArray")
-        saveData.setValue(dateArray, forKey: "dateArray")
+        saveData.set(dateArray, forKey: "dateArray")
+        
         
         //アラート
         let alert: UIAlertController = UIAlertController(title:"追加されました", message: "", preferredStyle: .alert)

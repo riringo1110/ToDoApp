@@ -30,7 +30,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if saveData.object(forKey: "todoArray") != nil {
             //UserDefaultsの中身をArrayに表示
             toDoArray = saveData.array(forKey: "todoArray") as! [String]
-            print(toDoArray)
             
             if saveData.object(forKey: "dateArray") != nil{
                 dateArray = saveData.array(forKey: "dateArray") as! [String]
